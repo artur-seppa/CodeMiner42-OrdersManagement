@@ -1,5 +1,3 @@
-create database codeminer_orders_management
-
 CREATE SEQUENCE seq_customers START WITH 1;
 
 CREATE SEQUENCE seq_orders START WITH 1;
@@ -14,7 +12,7 @@ CREATE TABLE customers (
 );
 
 CREATE TABLE orders (
-    id INT DEFAULT nextval('seq_orders') PRIMARY KEY
+    id INT DEFAULT nextval('seq_orders') PRIMARY KEY,
     customer_id INT NOT NULL,
     ordered_at TIMESTAMP NOT NULL,
     CONSTRAINT fk_customer_id
@@ -23,7 +21,7 @@ CREATE TABLE orders (
 );
 
 CREATE TABLE products (
-    id SERIAL PRIMARY KEY,
+    id INT DEFAULT nextval('seq_products') PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     description TEXT,
     price_cents INT NOT NULL
@@ -36,7 +34,7 @@ CREATE TABLE order_products (
     PRIMARY KEY (order_id, product_id),
     CONSTRAINT fk_order_id
         FOREIGN KEY (order_id)
-        REFERENCES "order"(id),
+        REFERENCES orders(id),
     CONSTRAINT fk_product_id
         FOREIGN KEY (product_id)
         REFERENCES products(id)
