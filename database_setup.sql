@@ -1,14 +1,20 @@
 create database codeminer_orders_management
 
+CREATE SEQUENCE seq_customers START WITH 1;
+
+CREATE SEQUENCE seq_orders START WITH 1;
+
+CREATE SEQUENCE seq_products START WITH 1;
+
 CREATE TABLE customers (
-    id SERIAL PRIMARY KEY,
+    id INT DEFAULT nextval('seq_customers') PRIMARY KEY,
     first_name VARCHAR(100) NOT NULL,
     last_name VARCHAR(100) NOT NULL,
     active boolean NOT NULL
 );
 
-CREATE TABLE "order" (
-    id SERIAL PRIMARY KEY,
+CREATE TABLE orders (
+    id INT DEFAULT nextval('seq_orders') PRIMARY KEY
     customer_id INT NOT NULL,
     ordered_at TIMESTAMP NOT NULL,
     CONSTRAINT fk_customer_id
