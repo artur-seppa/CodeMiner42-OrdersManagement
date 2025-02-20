@@ -1,4 +1,3 @@
 SELECT name, price_cents
 FROM products
-ORDER BY price_cents DESC
-LIMIT 1;
+WHERE price_cents = (SELECT MAX(price_cents) FROM products);
