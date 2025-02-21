@@ -3,6 +3,6 @@ FROM customers c
 WHERE active = true
 AND NOT EXISTS (
     SELECT 1
-    FROM "order" o
+    FROM orders o
     WHERE o.customer_id = c.id
 );
